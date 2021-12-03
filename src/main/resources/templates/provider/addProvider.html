@@ -23,34 +23,34 @@ MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
 		<div class="card">
 			<div class="card-body">
 				<div class="col-md-10">
-					<form action="#" th:action="@{/provider/add}"
-						th:object="${provider}" method="post">
+					<form action="#" th:action="@{/provider/add}" th:object="${provider}" method="post">
 						<div class="row">
 							<div class="form-group col-md-8">
-								<label for="name" class="col-form-label">Name</label> <input
-									type="text" th:field="*{name}" class="form-control" id="name"
-									placeholder="Name"> <span
-									th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-									class="text-danger"></span>
+								<label for="name" class="col-form-label">Name</label> 
+								<input type="text" th:field="*{name}" class="form-control" id="name"
+									placeholder="Name"> 
+								<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+									class="text-danger">
+								</span>
 							</div>
 							<div class="form-group col-md-8">
-								<label for="email" class="col-form-label">Email</label> <input
-									type="text" th:field="*{email}" class="form-control"
-									id="email" placeholder="Email"> <span
-									th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-									class="text-danger"></span>
+								<label for="email" class="col-form-label">Email</label> 
+								<input type="text" th:field="*{email}" class="form-control"
+									id="email" placeholder="Email"> 
+								<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+									class="text-danger">
+								</span>
 							</div>
 							<div class="form-group col-md-8">
-
 								<label for="address" class="col-form-label">Address</label> 
 								<input type="text" th:field="*{address}" class="form-control"
-									id="address" placeholder="address"> <span
-									th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
-									class="text-danger"></span>
+									id="address" placeholder="address">
+								<span th:if="${#fields.hasErrors('address')}" th:errors="*{address}"
+									class="text-danger">
+								</span>
 							</div>
 							<div class="col-md-6">
-								<input type="submit" class="btn btn-primary"
-									value="Add Provider">
+								<input type="submit" class="btn btn-primary" value="Add Provider">
 							</div>
 							<div class="form-group col-md-8"></div>
 						</div>

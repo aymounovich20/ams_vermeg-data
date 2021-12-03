@@ -1,5 +1,7 @@
 package com.sip.ams.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,11 @@ public class ProviderController {
 	@GetMapping("list")
 	public String listProviders(Model model) {
 		System.out.println(providerRepository.findAll());
-		model.addAttribute("providers", providerRepository.findAll());
+		List<Provider> list = (List<Provider>) providerRepository.findAll();
+		if (list.size() == 0)
+			model.addAttribute("provider", null);
+		else
+			model.addAttribute("providers", providerRepository.findAll());
 		return "provider/listProviders";
 	}
 
@@ -42,18 +48,34 @@ public class ProviderController {
 		providerRepository.save(provider);
 		return "redirect:list";
 	}
+
 	@GetMapping("delete/{id}")
 	public String deleteProvider(@PathVariable("id") long id, Model model) {
 
-	//long id2 = 100L;
-	Provider provider = providerRepository.findById(id)
-	.orElseThrow(()-> new IllegalArgumentException("Invalid provider Id:" + id));
-	System.out.println("suite du programme...");
-	providerRepository.delete(provider);
-	/*model.addAttribute("providers",
-	providerRepository.findAll());
-	return "provider/listProviders";*/
-	return "redirect:../list";
+		// long id2 = 100L;
+		Provider provider = providerRepository.findById(id)
+				.orElseThrow(() -> new IllegalArgumentException("Invalid provider Id:" + id));
+		System.out.println("suite du programme...");
+		providerRepository.delete(provider);
+		/*
+		 * model.addAttribute("providers", providerRepository.findAll()); return
+		 * "provider/listProviders";
+		 */
+		return "redirect:../list";
+	}
+@RequestMapping("edit/{id}")
+	public String showProviderFormToUpdate(@PathVariable("id") long id, Model model) {
+			Provider provider = providerRepository.findById(id).orElseThrow(()->new IllegalArgumentException
+					("Invalid provider Id:" + id));
+			model.addAttribute("provider", provider);
+			return "provider/updateProvider";
+			}
+
+	@PostMapping("update")
+	public String updateProvider(@Valid Provider provider, BindingResult result, Model model) {
+
+		providerRepository.save(provider);
+		return "redirect:list";
 	}
 
 }
