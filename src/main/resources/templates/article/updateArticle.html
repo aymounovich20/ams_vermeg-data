@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Update Article</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-
+MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-
+5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-5">
+		<h3 align="center">Update Article</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-8">
+					<form action="#"
+						th:action="@{/article/edit/}"
+						th:object="${article}" method="post">
+						<input type="hidden" th:field="*{id}" />
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">Label</label> <input
+									type="text" th:field="*{label}" class="form-control" id="label"
+									placeholder="Label" /> <span
+									th:if="${#fields.hasErrors('label')}" th:errors="*{label}"
+									class="textdanger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="price" class="col-form-label">Price</label> <input
+									type="text" th:field="*{price}" class="form-control" id="price"
+									placeholder="Price" /> <span
+									th:if="${#fields.hasErrors('price')}" th:errors="*{price}"
+									class="textdanger"></span>
+							</div>
+							<div class="form-group col-md-8">
+								<label for="image" class="col-formlabel">Picture</label>
+								<input class="form-control" type="file"
+								name="files" multiple id="image">
+							</div>
+							<div class="form-group col-md-8">
+								<label for="provider" class="col-formlabel">Select
+									Provider</label> <select name="providerId" class="form-control">
+									<option th:each="pr: ${providers}" th:value="${pr.id}"
+										th:text="${pr.name}"
+										th:selected="(${pr.id} == ${idProvider})" />
+								</select>
+							</div>
+							<div class="form-group col-md-8">
+								<input type="submit" class="btn btn-primary"
+									value="Update Article">
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="x-ua-compatible" content="ie=edge">
+<title>Show Article</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+	integrity="sha384-
+MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
+	integrity="sha384-
+5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
+	crossorigin="anonymous">
+</head>
+<body>
+	<div class="container my-5">
+		<h3 align="center">Article details</h3>
+		<div class="card">
+			<div class="card-body">
+				<div class="col-md-8">
+					<form action="#" method="">
+						<div class="row">
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">ID</label>
+								<p th:text="${article.id}">Id</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">Label</label>
+								<p th:text="${article.label}">Label</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">Price</label>
+								<p th:text="${article.price}">Price</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">Provider</label>
+								<p th:text="${article.provider.name}">Provider</p>
+							</div>
+							<div class="form-group col-md-6">
+								<label for="label" class="col-formlabel">Picture</label> <img
+									alt="Image" th:src="@{'/uploads/'+${article.picture}}"
+									width="250" height="250" />
+							</div>
+							<div class="form-group col-md-8">
+								<a th:href="@{/article/list}"> <input type="button"
+									class="btn btn-primary" value="return to Article list"></a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
