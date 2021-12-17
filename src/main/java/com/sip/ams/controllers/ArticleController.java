@@ -77,14 +77,7 @@ public class ArticleController {
 		StringBuilder fileName = new StringBuilder();
 		MultipartFile file = files[0];
 		Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
-		System.out.println(file.getOriginalFilename());
-		
-		if(articleRepository.findArticleByPicture(file.getOriginalFilename())!=null)
-		{	Date date = new Date();
-			System.out.println(date);
-			fileName.append(date.toString());}
 		fileName.append(file.getOriginalFilename());
-		
 		try {
 		Files.write(fileNameAndPath, file.getBytes()); //upload
 		} catch (IOException e) {
@@ -119,8 +112,7 @@ public class ArticleController {
 
 	@PostMapping("edit")
 	public String updateArticle(@Valid Article article, BindingResult result, Model model,
-			@RequestParam(name = "providerId", required = false) Long p,
-			@RequestParam("files") MultipartFile[] files) {
+			@RequestParam(name = "providerId", required = false) Long p) {
 		if (result.hasErrors()) {
 			
 			return "article/updateArticle";
@@ -128,17 +120,6 @@ public class ArticleController {
 		Provider provider = providerRepository.findById(p)
 				.orElseThrow(() -> new IllegalArgumentException("Invalid provider Id:" + p));
 		article.setProvider(provider);
-		StringBuilder fileName = new StringBuilder();
-		MultipartFile file = files[0];
-		Path fileNameAndPath = Paths.get(uploadDirectory,file.getOriginalFilename());
-		fileName.append(file.getOriginalFilename());
-		try {
-		Files.write(fileNameAndPath, file.getBytes()); //upload
-		} catch (IOException e) {
-		e.printStackTrace();
-		}
-		article.setPicture(fileName.toString());
-		
 		articleRepository.save(article);
 		return "redirect:../list";
 		//model.addAttribute("articles", articleRepository.findAll());
